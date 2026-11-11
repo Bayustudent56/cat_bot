@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="CatBot: chatbot berbasis aturan untuk perawatan dasar kucing, mulai dari makanan, kebersihan, hingga perawatan.">
+  <title>{% block title %}CatBot{% endblock %} | Perawatan dasar kucing</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🐱%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="{% block body_class %}{% endblock %}">
+  <a class="skip-link" href="#main">Lewati ke konten</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="{{ url_for('index') }}" aria-label="CatBot, ke beranda">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-name">CatBot</span>
+      </a>
+      <nav class="site-nav" aria-label="Navigasi utama">
+        <a href="{{ url_for('index') }}" {% if request.endpoint == 'index' %}aria-current="page"{% endif %}>Beranda</a>
+        <a href="{{ url_for('chat') }}" {% if request.endpoint == 'chat' %}aria-current="page"{% endif %}>Mulai chat</a>
+        <a href="{{ url_for('admin', token=request.args.get('token')) }}" {% if request.endpoint == 'admin' %}aria-current="page"{% endif %}>Admin</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>{{ engine.disclaimer }}</p>
+    </div>
+  </footer>
+
+  {% block scripts %}{% endblock %}
+</body>
+</html>

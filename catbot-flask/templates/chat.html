@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Chat{% endblock %}
+{% block body_class %}page-chat{% endblock %}
+
+{% block content %}
+<section class="chat-shell wrap">
+  <div class="chat-card">
+    <div class="chat-head">
+      <span class="avatar avatar-lg" aria-hidden="true"></span>
+      <div>
+        <h1 class="chat-title">Ngobrol dengan CatBot</h1>
+        <p class="chat-sub">Makanan, kebersihan, dan perawatan kucing</p>
+      </div>
+    </div>
+
+    <div id="chat-log" class="chat-log" role="log" aria-live="polite" aria-label="Percakapan dengan CatBot">
+      <div class="msg msg-bot">
+        <span class="avatar" aria-hidden="true"></span>
+        <div class="bubble">Halo! Aku CatBot. Tanyakan apa saja seputar makanan, kebersihan, dan perawatan kucing, atau pilih saran di bawah.</div>
+      </div>
+    </div>
+
+    <div class="quick-replies" id="quick-replies" aria-label="Saran pertanyaan cepat">
+      {% for text in quick_replies %}
+      <button type="button" class="chip" data-text="{{ text }}">{{ text }}</button>
+      {% endfor %}
+    </div>
+
+    <form id="chat-form" class="chat-form" autocomplete="off">
+      <label class="visually-hidden" for="chat-input">Tulis pertanyaanmu</label>
+      <input id="chat-input" name="message" type="text" maxlength="{{ max_length }}"
+             placeholder="Tulis pertanyaanmu tentang kucing..." required>
+      <button type="submit" class="btn btn-primary" id="send-btn">Kirim</button>
+    </form>
+  </div>
+  <p class="chat-note">{{ engine.disclaimer }}</p>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/chat.js') }}" defer></script>
+{% endblock %}

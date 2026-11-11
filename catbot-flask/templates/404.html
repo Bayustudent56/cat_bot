@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Halaman tidak ditemukan{% endblock %}
+
+{% block content %}
+<section class="section not-found">
+  <div class="wrap narrow">
+    <div class="nf-cat" aria-hidden="true">🙀</div>
+    <h1>{{ message or "Halaman ini tidak ditemukan" }}</h1>
+    <p class="lead">Alamat yang kamu buka tidak ada, atau sudah dipindahkan.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="{{ url_for('index') }}">Kembali ke beranda</a>
+      <a class="btn btn-ghost" href="{{ url_for('chat') }}">Mulai chat</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

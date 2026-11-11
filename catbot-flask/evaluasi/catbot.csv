@@ -1,0 +1,68 @@
+pertanyaan,expected_intent
+Halo CatBot,salam
+Hai,salam
+Selamat pagi,salam
+Permisi boleh tanya,salam
+Halo saya mau tanya tentang kucing,salam
+Makanan apa yang bagus untuk kucing?,makanan_kucing
+Kucing sebaiknya makan apa?,makanan_kucing
+Apakah kucing boleh makan ayam?,makanan_kucing
+Kucing boleh makan tuna?,makanan_kucing
+Makanan manusia apa yang tidak boleh diberikan ke kucing?,makanan_kucing
+Lebih bagus makanan basah atau makanan kering?,makanan_kucing
+Rekomendasi makanan kucing,makanan_kucing
+Berapa kali kucing makan dalam sehari?,jadwal_makan
+Jadwal makan kucing yang baik,jadwal_makan
+Kapan sebaiknya kucing diberi makan?,jadwal_makan
+Berapa porsi makan kucing dewasa?,jadwal_makan
+Kucing tidak mau makan kenapa?,jadwal_makan
+Kucing butuh minum berapa banyak?,minum_kucing
+Bagaimana supaya kucing mau minum?,minum_kucing
+Boleh kasih susu ke kucing?,minum_kucing
+Air minum kucing diganti kapan?,minum_kucing
+Cara membersihkan telinga kucing,kebersihan_kucing
+Cara membersihkan mata kucing,kebersihan_kucing
+Bagaimana cara memotong kuku kucing?,kebersihan_kucing
+Cara merawat gigi kucing,kebersihan_kucing
+Cara membasmi kutu kucing,kebersihan_kucing
+Seberapa sering kucing harus dimandikan?,mandi_kucing
+Cara memandikan kucing yang benar,mandi_kucing
+Boleh pakai sampo manusia untuk kucing?,mandi_kucing
+Kucing takut air bagaimana cara memandikannya?,mandi_kucing
+Apa itu mandi kering untuk kucing?,mandi_kucing
+Seberapa sering bulu kucing disisir?,perawatan_bulu
+Bulu kucing saya kusut harus bagaimana?,perawatan_bulu
+Cara mengatasi hairball pada kucing,perawatan_bulu
+Kenapa bulu kucing rontok banyak?,perawatan_bulu
+Seberapa sering litter box dibersihkan?,litter_box
+Pasir kucing yang bagus yang mana?,litter_box
+Kucing saya buang air sembarangan,litter_box
+Letak litter box yang baik di mana?,litter_box
+Kapan kucing harus divaksin?,kesehatan_kucing
+Apakah kucing perlu obat cacing?,kesehatan_kucing
+Tanda kucing sehat apa saja?,kesehatan_kucing
+Kucing saya muntah apa yang harus dilakukan?,kesehatan_kucing
+Kucing saya bersin bersin,kesehatan_kucing
+Kucing saya keracunan,darurat_kesehatan
+Kucing saya kejang kejang,darurat_kesehatan
+Kucing saya sulit bernapas,darurat_kesehatan
+Kucing saya tertabrak motor,darurat_kesehatan
+Kucing saya memakan cokelat,darurat_kesehatan
+Anak kucing makan apa?,perawatan_anak_kucing
+Kapan anak kucing bisa makan makanan padat?,perawatan_anak_kucing
+Cara merawat anak kucing yang baru lahir,perawatan_anak_kucing
+Kapan anak kucing boleh dipisah dari induknya?,perawatan_anak_kucing
+Kenapa kucing mengeong terus?,perilaku_kucing
+Kenapa kucing mendengkur?,perilaku_kucing
+Kenapa kucing suka menginjak injak saya?,perilaku_kucing
+Kenapa kucing saya menggigit?,perilaku_kucing
+Apa arti ekor kucing yang tegak?,perilaku_kucing
+Terima kasih,penutup
+Makasih banyak ya,penutup
+Sampai jumpa,penutup
+Oke sudah paham,penutup
+Siapa presiden Indonesia?,fallback
+Bagaimana cuaca hari ini?,fallback
+Cara membuat nasi goreng,fallback
+Berapa harga mobil baru?,fallback
+Tolong buatkan puisi tentang bulan,fallback

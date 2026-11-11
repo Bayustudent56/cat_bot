@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% block title %}Dashboard admin{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="wrap">
+    <h1>Dashboard admin</h1>
+    <p class="section-intro">Pantau percakapan, seberapa sering pertanyaan dikenali, dan pertanyaan yang perlu ditambahkan ke basis pengetahuan.</p>
+
+    {% if not token_required %}
+    <p class="banner banner-warn" role="note">
+      Dashboard ini belum dilindungi. Atur variabel lingkungan <code>CATBOT_ADMIN_TOKEN</code>, lalu buka <code>/admin?token=...</code>.
+    </p>
+    {% endif %}
+
+    <div class="stat-grid">
+      <div class="stat"><span class="stat-value">{{ stats.total }}</span><span class="stat-label">Total pertanyaan</span></div>
+      <div class="stat"><span class="stat-value">{{ stats.recognition_rate }}%</span><span class="stat-label">Berhasil dikenali ({{ stats.recognized_count }})</span></div>
+      <div class="stat"><span class="stat-value">{{ stats.fallback_count }}</span><span class="stat-label">Jatuh ke fallback ({{ stats.fallback_rate }}%)</span></div>
+      <div class="stat"><span class="stat-value">{{ stats.sessions }}</span><span class="stat-label">Sesi percakapan</span></div>
+      {% if report %}
+      <div class="stat stat-accent"><span class="stat-value">{{ '%.1f'|format(report.accuracy * 100) }}%</span><span class="stat-label">Akurasi evaluasi CSV ({{ report.correct }}/{{ report.total }})</span></div>
+      {% endif %}
+    </div>
+
+    <div class="admin-grid">
+      <div class="panel">
+        <h2>Distribusi intent</h2>
+        {% if stats.intents %}
+        <ul class="bars">
+          {% for item in stats.intents %}
+          <li>
+            <span class="bar-name">{{ item.intent }}</span>
+            <span class="bar-track"><span class="bar-fill {% if item.intent == 'fallback' %}bar-fallback{% endif %}" style="width: {{ (item.total / max_intent_total * 100)|round(1) }}%"></span></span>
+            <span class="bar-count">{{ item.total }}</span>
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p class="empty">Belum ada percakapan. Buka halaman <a href="{{ url_for('chat') }}">chat</a> dan coba tanyakan sesuatu.</p>
+        {% endif %}
+      </div>
+
+      <div class="panel">
+        <h2>Pertanyaan fallback</h2>
+        {% if fallbacks %}
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Pertanyaan</th><th class="num">Jumlah</th><th>Terakhir</th></tr></thead>
+            <tbody>
+              {% for row in fallbacks %}
+              <tr><td>{{ row.question }}</td><td class="num">{{ row.total }}</td><td>{{ row.last_seen }}</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% else %}
+        <p class="empty">Belum ada pertanyaan yang jatuh ke fallback.</p>
+        {% endif %}
+      </div>
+    </div>
+
+    {% if report %}
+    <div class="panel">
+      <h2>Akurasi evaluasi per intent</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Intent</th><th class="num">Benar</th><th class="num">Total</th><th class="num">Akurasi</th></tr></thead>
+          <tbody>
+            {% for tag, s in report.per_intent.items() %}
+            <tr><td>{{ tag }}</td><td class="num">{{ s.correct }}</td><td class="num">{{ s.total }}</td><td class="num">{{ '%.0f'|format(s.accuracy * 100) }}%</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% if report.failures %}
+      <h3>Pertanyaan uji yang meleset</h3>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Pertanyaan</th><th>Harapan</th><th>Prediksi</th><th class="num">Skor</th></tr></thead>
+          <tbody>
+            {% for f in report.failures %}
+            <tr><td>{{ f.pertanyaan }}</td><td>{{ f.expected }}</td><td>{{ f.predicted }}</td><td class="num">{{ f.score }}</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% endif %}
+    </div>
+    {% endif %}
+
+    <div class="panel">
+      <h2>Riwayat percakapan terbaru</h2>
+      {% if conversations %}
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Waktu</th><th>Pertanyaan</th><th>Intent</th><th class="num">Skor</th><th>Jawaban</th></tr></thead>
+          <tbody>
+            {% for c in conversations %}
+            <tr>
+              <td class="nowrap">{{ c.created_at }}</td>
+              <td>{{ c.user_message }}</td>
+              <td><span class="tag {% if c.is_fallback %}tag-fallback{% endif %}">{{ c.intent }}</span></td>
+              <td class="num">{{ '%.2f'|format(c.score) }}</td>
+              <td class="answer">{{ c.response }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <p class="empty">Riwayat masih kosong.</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,383 @@
+{
+  "name": "CatBot",
+  "description": "Chatbot berbasis aturan untuk perawatan dasar kucing: makanan, kebersihan, dan perawatan.",
+  "disclaimer": "CatBot adalah asisten informasi perawatan dasar, bukan pengganti dokter hewan. Untuk gejala penyakit, kondisi darurat, atau masalah kesehatan serius, segera konsultasikan ke dokter hewan.",
+  "threshold": 0.5,
+  "urgent_keywords": [
+    "keracunan",
+    "kejang",
+    "sulit bernapas",
+    "susah bernapas",
+    "tertabrak",
+    "pingsan",
+    "berdarah",
+    "tidak bisa buang air kecil",
+    "tidak bisa pipis"
+  ],
+  "quick_replies": [
+    "Makanan apa yang bagus untuk kucing?",
+    "Berapa kali kucing makan dalam sehari?",
+    "Seberapa sering kucing harus dimandikan?",
+    "Seberapa sering litter box dibersihkan?",
+    "Bagaimana cara menjaga kebersihan kucing?",
+    "Seberapa sering bulu kucing disisir?",
+    "Kapan kucing harus divaksin?",
+    "Kenapa kucing mendengkur?"
+  ],
+  "intents": [
+    {
+      "tag": "salam",
+      "description": "Sapaan dan pembuka percakapan",
+      "response_mode": "random",
+      "patterns": [
+        "Halo CatBot",
+        "Hai",
+        "Halo",
+        "Hi bot",
+        "Selamat pagi",
+        "Selamat siang",
+        "Selamat sore",
+        "Selamat malam",
+        "Halo, saya mau tanya tentang kucing",
+        "Permisi, boleh tanya?",
+        "Assalamualaikum",
+        "Ada orang?"
+      ],
+      "responses": [
+        "Halo! Selamat datang di CatBot. Ada yang ingin kamu tanyakan tentang perawatan kucing?",
+        "Hai! Senang bisa membantu. Kamu bisa bertanya seputar makanan, kebersihan, dan perawatan kucing.",
+        "Halo, pecinta kucing! Silakan tanya apa saja tentang makanan, kebersihan, atau perawatan kucing kesayanganmu."
+      ]
+    },
+    {
+      "tag": "makanan_kucing",
+      "description": "Jenis makanan yang cocok untuk kucing",
+      "response_mode": "relevant",
+      "patterns": [
+        "Makanan apa yang bagus untuk kucing?",
+        "Kucing sebaiknya makan apa?",
+        "Boleh tidak kucing makan ikan?",
+        "Apakah kucing boleh makan ayam?",
+        "Makanan manusia apa yang tidak boleh diberikan ke kucing?",
+        "Lebih bagus makanan basah atau kering?",
+        "Kucing boleh makan nasi?",
+        "Makanan yang beracun untuk kucing apa saja?",
+        "Boleh kasih kucing makanan sisa?",
+        "Rekomendasi makanan kucing dong",
+        "Apakah dry food cukup untuk kucing?"
+      ],
+      "responses": [
+        "Kucing membutuhkan makanan lengkap dan seimbang yang diformulasikan khusus untuk kucing. Kamu bisa memilih makanan basah, kering, atau kombinasi keduanya sesuai usia dan kondisi kucing.",
+        "Beberapa makanan manusia berbahaya bagi kucing, seperti bawang merah, bawang putih, cokelat, anggur dan kismis, kafein, alkohol, serta makanan mengandung pemanis xylitol. Sebaiknya berikan makanan khusus kucing.",
+        "Ikan dan ayam boleh diberikan dalam bentuk matang, tanpa bumbu, garam, dan tulang, serta hanya sebagai tambahan. Hindari ikan mentah karena berisiko membawa bakteri dan parasit.",
+        "Makanan basah membantu kebutuhan cairan, sedangkan makanan kering lebih praktis dan tahan lama. Kombinasi keduanya sering menjadi pilihan yang baik. Pastikan label kemasan bertuliskan 'complete and balanced'."
+      ],
+      "response_keywords": [
+        ["rekomendasi", "rekomen", "bagus", "makan apa", "makanan apa", "merk", "merek"],
+        ["manusia", "beracun", "racun", "sisa", "nasi", "tidak boleh", "bahaya", "cokelat", "coklat", "bawang"],
+        ["ikan", "ayam", "tuna", "daging", "telur", "salmon"],
+        ["basah", "kering", "dry", "wet", "kaleng", "pouch", "sachet"]
+      ]
+    },
+    {
+      "tag": "jadwal_makan",
+      "description": "Waktu dan frekuensi pemberian makan",
+      "response_mode": "relevant",
+      "patterns": [
+        "Berapa kali kucing makan dalam sehari?",
+        "Jadwal makan kucing yang baik bagaimana?",
+        "Kapan sebaiknya kucing diberi makan?",
+        "Berapa banyak porsi makan kucing?",
+        "Kucing saya makan terus, apa normal?",
+        "Boleh ditinggal makanan seharian?",
+        "Kucing tidak mau makan, kenapa?",
+        "Berapa gram makanan kering per hari?"
+      ],
+      "responses": [
+        "Kucing dewasa umumnya diberi makan 2-3 kali sehari dengan porsi terukur. Anak kucing membutuhkan makan lebih sering, sekitar 3-4 kali sehari.",
+        "Porsi tergantung berat badan, usia, dan jenis makanan. Ikuti panduan takaran pada kemasan, lalu sesuaikan agar berat badan kucing tetap ideal. Hindari memberi makan berlebihan agar tidak obesitas.",
+        "Makanan kering boleh ditinggal untuk sementara, tetapi makanan basah sebaiknya tidak dibiarkan lebih dari 1-2 jam karena mudah basi.",
+        "Jika kucing tidak mau makan lebih dari 24 jam, terlihat lemas, atau muntah, sebaiknya segera konsultasikan ke dokter hewan."
+      ],
+      "response_keywords": [
+        ["berapa kali", "sehari", "jadwal", "kapan", "frekuensi", "sering"],
+        ["porsi", "berapa banyak", "gram", "takaran", "terus", "berlebih", "obesitas", "gemuk"],
+        ["tinggal", "seharian", "basi", "ditinggal"],
+        ["tidak mau makan", "tidak nafsu", "mogok makan", "lemas", "muntah"]
+      ]
+    },
+    {
+      "tag": "minum_kucing",
+      "description": "Kebutuhan air minum kucing",
+      "response_mode": "relevant",
+      "patterns": [
+        "Kucing butuh minum berapa banyak?",
+        "Kucing saya jarang minum, normal tidak?",
+        "Bagaimana agar kucing mau minum?",
+        "Air minum kucing harus diganti kapan?",
+        "Boleh kasih susu ke kucing?",
+        "Kucing boleh minum air keran?",
+        "Perlu beli water fountain untuk kucing?"
+      ],
+      "responses": [
+        "Kucing membutuhkan air bersih setiap saat. Sebagai gambaran, kucing dewasa butuh sekitar 50 ml air per kg berat badan per hari, termasuk dari makanan basah.",
+        "Ganti air minum setiap hari dan cuci wadahnya secara rutin. Letakkan wadah di beberapa titik, jauh dari tempat makan dan litter box.",
+        "Untuk mendorong kucing minum, kamu bisa memberi makanan basah, memakai wadah lebar, atau mencoba dispenser air mengalir (water fountain).",
+        "Sebagian besar kucing dewasa sulit mencerna laktosa, jadi susu sapi sebaiknya dihindari. Air putih bersih adalah pilihan terbaik.",
+        "Jika kucing minum jauh lebih banyak atau lebih sedikit dari biasanya, segera periksakan ke dokter hewan."
+      ],
+      "response_keywords": [
+        ["berapa banyak", "butuh minum", "kebutuhan", "jumlah"],
+        ["diganti", "ganti", "wadah", "cuci", "mangkuk"],
+        ["agar", "mau minum", "fountain", "dispenser", "mengalir", "supaya"],
+        ["susu", "keran", "laktosa", "air putih", "air mineral"],
+        ["jarang", "normal", "lebih banyak", "lebih sedikit", "kebanyakan", "terlalu banyak"]
+      ]
+    },
+    {
+      "tag": "kebersihan_kucing",
+      "description": "Menjaga kebersihan tubuh kucing",
+      "response_mode": "relevant",
+      "patterns": [
+        "Bagaimana cara menjaga kebersihan kucing?",
+        "Cara membersihkan telinga kucing?",
+        "Cara membersihkan mata kucing?",
+        "Bagaimana merawat gigi kucing?",
+        "Cara memotong kuku kucing?",
+        "Kucing saya bau, harus bagaimana?",
+        "Cara membersihkan kutu kucing?",
+        "Kucing garuk-garuk terus, kenapa?"
+      ],
+      "responses": [
+        "Kucing rajin membersihkan dirinya sendiri, tetapi kamu tetap perlu membantu: bersihkan area mata, telinga, dan gigi secara berkala, serta potong kuku sesuai kebutuhan.",
+        "Bersihkan kotoran mata dengan kapas atau kain lembut yang dibasahi air bersih. Telinga cukup dibersihkan bagian luarnya saja, jangan memasukkan cotton bud ke dalam telinga.",
+        "Gosok gigi kucing dengan sikat dan pasta gigi khusus kucing. Jangan memakai pasta gigi manusia. Potong hanya ujung kuku yang bening, hindari bagian merah muda karena mengandung pembuluh darah.",
+        "Garukan terus-menerus bisa menandakan kutu, tungau, atau alergi. Gunakan obat kutu khusus kucing dan konsultasikan ke dokter hewan agar penanganannya tepat."
+      ],
+      "response_keywords": [
+        ["kebersihan", "menjaga", "bau", "rawat", "merawat"],
+        ["mata", "telinga", "kuping", "belekan"],
+        ["gigi", "kuku", "potong", "motong", "sikat", "karang"],
+        ["kutu", "garuk", "tungau", "gatal", "alergi", "jamur"]
+      ]
+    },
+    {
+      "tag": "mandi_kucing",
+      "description": "Cara dan frekuensi memandikan kucing",
+      "response_mode": "relevant",
+      "patterns": [
+        "Seberapa sering kucing harus dimandikan?",
+        "Cara memandikan kucing yang benar?",
+        "Boleh pakai sampo manusia untuk kucing?",
+        "Kucing takut air, bagaimana memandikannya?",
+        "Apakah kucing perlu dimandikan?",
+        "Kucing habis mandi harus diapakan?",
+        "Mandi kering untuk kucing itu apa?"
+      ],
+      "responses": [
+        "Kucing tidak perlu sering dimandikan karena sudah membersihkan dirinya sendiri. Umumnya cukup setiap 1-2 bulan, atau ketika kotor, berbau, atau atas anjuran dokter hewan.",
+        "Gunakan sampo khusus kucing, jangan sampo manusia atau anjing karena bisa membuat kulit iritasi. Gunakan air hangat suam-suam kuku dan hindari area wajah, mata, serta telinga.",
+        "Jika kucing takut air, lakukan dengan tenang, siapkan semua perlengkapan lebih dulu, dan beri camilan sebagai hadiah. Alternatifnya, gunakan tisu basah khusus kucing atau mandi kering.",
+        "Setelah mandi, keringkan dengan handuk dan hair dryer suhu rendah jika kucing tenang. Pastikan bulu benar-benar kering dan kucing berada di tempat hangat."
+      ],
+      "response_keywords": [
+        ["sering", "perlu", "berapa kali", "frekuensi", "jarang", "berapa lama sekali"],
+        ["cara", "sampo", "shampoo", "benar", "sabun"],
+        ["takut", "mandi kering", "tisu", "tidak suka air", "menolak"],
+        ["habis", "setelah", "keringkan", "mengeringkan", "handuk", "hair dryer", "selesai mandi"]
+      ]
+    },
+    {
+      "tag": "perawatan_bulu",
+      "description": "Menyisir dan merawat bulu kucing",
+      "response_mode": "relevant",
+      "patterns": [
+        "Seberapa sering bulu kucing disisir?",
+        "Cara merawat bulu kucing agar tidak rontok?",
+        "Bulu kucing saya kusut, harus bagaimana?",
+        "Sisir apa yang cocok untuk kucing?",
+        "Kenapa bulu kucing rontok banyak?",
+        "Cara mengatasi hairball?",
+        "Perawatan bulu kucing persia bagaimana?"
+      ],
+      "responses": [
+        "Kucing berbulu pendek cukup disisir 1-2 kali seminggu, sedangkan kucing berbulu panjang sebaiknya disisir hampir setiap hari agar tidak kusut.",
+        "Sisir secara perlahan searah tumbuhnya bulu. Gunakan sisir atau slicker brush yang sesuai jenis bulu, dan beri camilan agar kucing nyaman.",
+        "Bulu kusut ringan dapat diurai pelan-pelan dengan jari atau sisir. Jangan menarik paksa. Untuk kusut parah, minta bantuan groomer atau dokter hewan.",
+        "Penyisiran rutin membantu mengurangi rontok dan hairball (gumpalan bulu di perut). Kerontokan yang tiba-tiba, disertai kebotakan atau kulit merah, perlu diperiksakan ke dokter hewan."
+      ],
+      "response_keywords": [
+        ["sering", "seberapa", "persia", "panjang", "pendek", "anggora", "maine coon"],
+        ["merawat", "perawatan", "sisir", "slicker", "agar", "supaya"],
+        ["kusut", "urai", "groomer", "gimbal"],
+        ["hairball", "rontok", "botak", "mendadak", "kenapa", "muntah bulu"]
+      ]
+    },
+    {
+      "tag": "litter_box",
+      "description": "Kebersihan pasir dan tempat buang air",
+      "response_mode": "relevant",
+      "patterns": [
+        "Seberapa sering litter box dibersihkan?",
+        "Pasir kucing yang bagus yang mana?",
+        "Kucing saya buang air sembarangan, kenapa?",
+        "Berapa banyak litter box yang dibutuhkan?",
+        "Cara membersihkan litter box?",
+        "Letak litter box yang baik di mana?",
+        "Kucing tidak mau pakai litter box",
+        "Pasir kucing gumpal atau tidak gumpal?"
+      ],
+      "responses": [
+        "Ambil kotoran dan gumpalan urine setidaknya sekali sehari. Ganti seluruh pasir dan cuci bak dengan sabun ringan sekitar 1-2 minggu sekali, tergantung jenis pasir.",
+        "Pilih pasir yang tidak terlalu berdebu dan tidak berbau menyengat. Pasir gumpal lebih mudah dibersihkan, sedangkan pasir tidak gumpal biasanya perlu diganti lebih sering.",
+        "Idealnya tersedia satu litter box per kucing ditambah satu cadangan. Letakkan di tempat tenang, mudah dijangkau, dan jauh dari tempat makan.",
+        "Jika kucing buang air sembarangan, periksa kebersihan bak, jenis pasir, dan letaknya. Stres juga bisa menjadi penyebab. Jika disertai kesulitan atau nyeri saat buang air, segera hubungi dokter hewan."
+      ],
+      "response_keywords": [
+        ["sering", "bersihkan", "cuci", "ganti", "sabun", "kotoran"],
+        ["pasir", "gumpal", "debu", "bagus", "jenis", "merk", "merek"],
+        ["berapa banyak", "dibutuhkan", "butuh", "letak", "letakkan", "tempat", "dimana", "di mana", "cadangan", "jumlah", "posisi"],
+        ["sembarangan", "tidak mau", "kenapa", "stres", "pipis di", "menolak", "masalah"]
+      ]
+    },
+    {
+      "tag": "kesehatan_kucing",
+      "description": "Informasi dasar kesehatan kucing",
+      "response_mode": "relevant",
+      "patterns": [
+        "Kapan kucing harus divaksin?",
+        "Apakah kucing perlu diberi obat cacing?",
+        "Tanda-tanda kucing sehat itu apa?",
+        "Kapan harus membawa kucing ke dokter hewan?",
+        "Apa itu steril kucing?",
+        "Kucing saya muntah, apa yang harus dilakukan?",
+        "Kucing saya diare, bagaimana?",
+        "Kucing saya lemas dan tidak mau makan",
+        "Kucing saya bersin-bersin dan berair matanya"
+      ],
+      "responses": [
+        "Kucing sehat biasanya aktif, nafsu makan baik, mata bersih, bulu mengilap, dan buang air normal. Pemeriksaan rutin ke dokter hewan dianjurkan minimal setahun sekali.",
+        "Vaksinasi dasar biasanya dimulai sekitar usia 8 minggu dan diulang sesuai jadwal dari dokter hewan. Obat cacing dan pencegah kutu juga perlu diberikan secara berkala.",
+        "Sterilisasi dapat membantu mencegah kehamilan tidak diinginkan dan mengurangi beberapa risiko kesehatan. Konsultasikan waktu yang tepat dengan dokter hewan.",
+        "Aku tidak bisa mendiagnosis penyakit. Jika kucing muntah berulang, diare, lemas, bersin berkepanjangan, atau tidak mau makan, sebaiknya segera konsultasi ke dokter hewan."
+      ],
+      "response_keywords": [
+        ["tanda", "sehat", "dokter hewan", "periksa", "cek rutin", "kapan harus"],
+        ["vaksin", "cacing", "kutu", "imunisasi"],
+        ["steril", "kastrasi", "kebiri", "spay", "neuter"],
+        ["muntah", "diare", "lemas", "bersin", "berair", "tidak mau makan", "pilek", "batuk", "sakit"]
+      ]
+    },
+    {
+      "tag": "darurat_kesehatan",
+      "description": "Kondisi darurat yang perlu segera ditangani dokter hewan",
+      "response_mode": "relevant",
+      "patterns": [
+        "Kucing saya keracunan",
+        "Kucing saya kejang",
+        "Kucing saya sulit bernapas",
+        "Kucing saya tidak bisa buang air kecil",
+        "Kucing saya tertabrak",
+        "Kucing saya pingsan",
+        "Kucing saya memakan cokelat",
+        "Kucing saya berdarah",
+        "Darurat, kucing saya sakit parah"
+      ],
+      "responses": [
+        "Ini bisa menjadi kondisi darurat. Segera bawa kucingmu ke dokter hewan atau klinik hewan 24 jam terdekat. CatBot tidak dapat menggantikan penanganan medis langsung.",
+        "Tetap tenang dan segera hubungi dokter hewan. Beri tahu apa yang terjadi, kapan kejadiannya, dan apa yang sudah dimakan atau dialami kucing. Jangan memberi obat manusia tanpa arahan dokter."
+      ],
+      "response_keywords": [
+        ["racun", "bernapas", "napas", "tertabrak", "pingsan", "buang air kecil", "pipis", "parah", "darurat"],
+        ["kejang", "cokelat", "coklat", "memakan", "berdarah", "luka"]
+      ]
+    },
+    {
+      "tag": "perawatan_anak_kucing",
+      "description": "Perawatan anak kucing",
+      "response_mode": "relevant",
+      "patterns": [
+        "Anak kucing makan apa?",
+        "Bagaimana merawat anak kucing yang baru lahir?",
+        "Kapan anak kucing bisa makan makanan padat?",
+        "Boleh kasih susu sapi ke anak kucing?",
+        "Anak kucing perlu divaksin kapan?",
+        "Kapan anak kucing boleh dipisah dari induknya?",
+        "Cara menghangatkan anak kucing?",
+        "Berapa kali anak kucing makan?"
+      ],
+      "responses": [
+        "Anak kucing sebaiknya mendapat ASI induk. Jika induk tidak ada, gunakan susu pengganti khusus anak kucing (kitten milk replacer), bukan susu sapi.",
+        "Anak kucing mulai dikenalkan makanan padat sekitar usia 4 minggu, dengan makanan khusus anak kucing yang dilunakkan. Frekuensi makan sekitar 3-4 kali sehari setelah masa penyapihan.",
+        "Anak kucing sebaiknya tidak dipisahkan dari induknya sebelum usia sekitar 8-12 minggu. Jaga tubuhnya tetap hangat, bersih, dan tenang.",
+        "Vaksinasi dasar biasanya dimulai sekitar usia 8 minggu. Periksakan juga ke dokter hewan untuk jadwal obat cacing dan pencegahan kutu."
+      ],
+      "response_keywords": [
+        ["makan apa", "susu", "asi", "pengganti", "dot"],
+        ["padat", "berapa kali", "sapih", "frekuensi", "kunyah"],
+        ["pisah", "induk", "hangat", "baru lahir", "merawat", "menghangatkan"],
+        ["vaksin", "cacing", "kutu", "imunisasi"]
+      ]
+    },
+    {
+      "tag": "perilaku_kucing",
+      "description": "Memahami kebiasaan dan perilaku kucing",
+      "response_mode": "relevant",
+      "patterns": [
+        "Kenapa kucing mengeong terus?",
+        "Kenapa kucing menggaruk sofa?",
+        "Kenapa kucing mendengkur?",
+        "Kenapa kucing suka menginjak-injak saya?",
+        "Kenapa kucing saya sembunyi?",
+        "Kenapa kucing mendesis?",
+        "Kenapa kucing saya mengigit?",
+        "Kucing saya sering kabur, kenapa?",
+        "Apa arti ekor kucing yang tegak?"
+      ],
+      "responses": [
+        "Kucing mengeong untuk berkomunikasi, misalnya karena lapar, ingin perhatian, atau tidak nyaman. Perhatikan konteksnya. Perubahan perilaku yang tiba-tiba bisa menandakan masalah kesehatan.",
+        "Menggaruk adalah perilaku alami untuk mengasah kuku dan menandai wilayah. Sediakan cakaran khusus (scratching post) agar perabot aman.",
+        "Mendengkur biasanya tanda nyaman, tetapi kadang juga muncul saat kucing stres atau sakit. Ekor tegak umumnya tanda percaya diri dan ramah.",
+        "Menginjak-injak (kneading) adalah kebiasaan yang berasal dari masa menyusu dan biasanya tanda kucing merasa nyaman. Mendesis atau bersembunyi menandakan takut atau stres, jadi beri ruang dan jangan dipaksa."
+      ],
+      "response_keywords": [
+        ["mengeong", "ngeong", "eong", "berisik", "suara"],
+        ["sofa", "menggaruk", "mencakar", "cakar", "perabot", "kursi"],
+        ["dengkur", "ekor", "tegak", "purr"],
+        ["injak", "desis", "sembunyi", "gigit", "menggigit", "mengigit", "kabur", "takut", "stres", "kneading"]
+      ]
+    },
+    {
+      "tag": "penutup",
+      "description": "Mengakhiri percakapan",
+      "response_mode": "random",
+      "patterns": [
+        "Terima kasih",
+        "Makasih ya",
+        "Thanks",
+        "Sampai jumpa",
+        "Dadah",
+        "Bye",
+        "Cukup, terima kasih",
+        "Oke, sudah paham",
+        "Selesai"
+      ],
+      "responses": [
+        "Sama-sama! Semoga kucingmu selalu sehat dan bahagia. Sampai jumpa!",
+        "Senang bisa membantu. Jika ada pertanyaan lain tentang kucing, CatBot siap membantu kapan saja!",
+        "Terima kasih sudah mengobrol dengan CatBot. Peluk hangat untuk kucingmu!"
+      ]
+    },
+    {
+      "tag": "fallback",
+      "description": "Pertanyaan di luar cakupan atau tidak dikenali",
+      "response_mode": "random",
+      "patterns": [],
+      "responses": [
+        "Maaf, aku belum mengerti pertanyaanmu. Coba tanyakan seputar makanan, kebersihan, atau perawatan kucing ya.",
+        "Pertanyaan itu di luar cakupan CatBot. Aku bisa membantu soal makanan, jadwal makan, mandi, perawatan bulu, litter box, dan kesehatan dasar kucing.",
+        "Aku belum punya jawaban untuk itu. Untuk masalah kesehatan atau kondisi khusus, sebaiknya konsultasi langsung dengan dokter hewan."
+      ]
+    }
+  ]
+}

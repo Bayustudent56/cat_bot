@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}Beranda{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <h1>Tanya apa saja soal merawat kucingmu.</h1>
+      <p class="lead">
+        CatBot menjawab pertanyaan dasar tentang makanan, kebersihan, dan perawatan kucing
+        sehari-hari. Jawabannya berasal dari basis pengetahuan dengan {{ intent_count }} topik,
+        bukan tebakan.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="{{ url_for('chat') }}">Mulai chat</a>
+        <a class="btn btn-ghost" href="#cakupan">Lihat cakupan topik</a>
+      </div>
+    </div>
+
+    <div class="hero-demo" aria-hidden="true">
+      <div class="demo-bubble demo-user">Kucingku boleh makan ayam?</div>
+      <div class="demo-row">
+        <span class="avatar"></span>
+        <div class="demo-bubble demo-bot">
+          Boleh, asal matang, tanpa bumbu, garam, dan tulang, serta hanya sebagai tambahan.
+        </div>
+      </div>
+      <div class="demo-bubble demo-user">Kalau kucing sulit bernapas?</div>
+      <div class="demo-row">
+        <span class="avatar"></span>
+        <div class="demo-bubble demo-bot demo-alert">
+          Ini bisa menjadi kondisi darurat. Segera bawa kucingmu ke dokter hewan.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cakupan" class="section">
+  <div class="wrap">
+    <h2>Yang bisa kamu tanyakan</h2>
+    <p class="section-intro">Tiga bidang utama, dengan jawaban singkat yang bisa langsung dipraktikkan.</p>
+    <div class="topic-grid">
+      {% for topic in topics %}
+      <article class="topic topic-{{ loop.index }}">
+        <span class="topic-icon" aria-hidden="true">{{ topic.icon }}</span>
+        <h3>{{ topic.title }}</h3>
+        <p>{{ topic.text }}</p>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="wrap notice">
+    <div>
+      <h2>CatBot bukan dokter hewan</h2>
+      <p>{{ engine.disclaimer }}</p>
+    </div>
+    <ul class="notice-list">
+      <li>Kucing keracunan, kejang, atau sulit bernapas: hubungi klinik hewan 24 jam sekarang.</li>
+      <li>Tidak mau makan lebih dari 24 jam atau lemas: konsultasikan ke dokter hewan.</li>
+      <li>CatBot tidak mendiagnosis penyakit dan tidak meresepkan obat.</li>
+    </ul>
+  </div>
+</section>
+{% endblock %}

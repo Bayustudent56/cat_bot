@@ -39,7 +39,7 @@
     log.scrollTop = log.scrollHeight;
   }
 
-  function addMessage(role, text, extraClass) {
+  function addMessage(role, text, extraClass, meta) {
     const row = document.createElement("div");
     row.className = "msg msg-" + role + (extraClass ? " " + extraClass : "");
 
@@ -53,7 +53,19 @@
     const bubble = document.createElement("div");
     bubble.className = "bubble";
     bubble.textContent = text; // textContent mencegah injeksi HTML
-    row.appendChild(bubble);
+
+    if (meta) {
+      const info = document.createElement("small");
+      info.className = "meta";
+      info.textContent = meta;
+
+      const column = document.createElement("div");
+      column.className = "bubble-col";
+      column.append(bubble, info);
+      row.appendChild(column);
+    } else {
+      row.appendChild(bubble);
+    }
 
     log.appendChild(row);
     scrollToBottom();
@@ -120,8 +132,13 @@
         sessionId = data.session_id;
         try { window.localStorage.setItem(SESSION_KEY, sessionId); } catch (_err) { /* diabaikan */ }
       }
-      addMessage("bot", data.reply, data.intent === "darurat_kesehatan" ? "is-alert" : "");
-    } catch (_err) {
+      addMessage(
+        "bot",
+        data.reply,
+        data.intent === "darurat_kesehatan" ? "is-alert" : "",
+        "intent: " + data.intent + " | skor: " + Number(data.score).toFixed(2)
+      );
+        } catch (_err) {
       typingRow.remove();
       addMessage("bot", "Tidak bisa terhubung ke server. Periksa koneksimu, lalu coba lagi.", "msg-error");
     } finally {

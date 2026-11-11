@@ -311,3 +311,17 @@ th { font-weight: 800; background: var(--bg-alt); position: sticky; top: 0; }
   .typing span { animation: none; opacity: 0.8; }
   .btn, .chip { transition: none; }
 }
+
+.bubble-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  max-width: min(85%, 560px);
+}
+.bubble-col .bubble { max-width: 100%; }
+.meta {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  padding-left: 0.5rem;
+}

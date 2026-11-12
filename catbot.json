@@ -2,7 +2,7 @@
   "name": "CatBot",
   "description": "Chatbot berbasis aturan untuk perawatan dasar kucing: makanan, kebersihan, dan perawatan.",
   "disclaimer": "CatBot adalah asisten informasi perawatan dasar, bukan pengganti dokter hewan. Untuk gejala penyakit, kondisi darurat, atau masalah kesehatan serius, segera konsultasikan ke dokter hewan.",
-  "threshold": 0.5,
+  "threshold": 0.45,
   "urgent_keywords": [
     "keracunan",
     "kejang",
